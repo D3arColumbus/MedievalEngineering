@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "medengineering:blocks/datablock",
+    "down": "medengineering:blocks/datablock",
+    "up": "medengineering:blocks/datablock",
+    "east": "medengineering:blocks/datablock",
+    "west": "medengineering:blocks/datablock",
+    "north": "medengineering:blocks/datablock",
+    "south": "medengineering:blocks/datablock"
+  }
+}
