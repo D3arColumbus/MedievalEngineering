@@ -9,6 +9,8 @@ public class ModBlocks {
 
     @GameRegistry.ObjectHolder(MedEngineering.MODID + ":firstblock")
     public static FirstBlock firstBlock;
+    @GameRegistry.ObjectHolder(MedEngineering.MODID + ":steelfurnace")
+    public static SteelFurnace steelfurnace;
     //@GameRegistry.ObjectHolder(MedEngineering.MODID + ":datablock")
     //public static DataBlock dataBlock;
 
@@ -16,6 +18,7 @@ public class ModBlocks {
     public static void initModels() {
         firstBlock.initModel();
         //dataBlock.initModel();
+        steelfurnace.initModel();
 
 
     }
