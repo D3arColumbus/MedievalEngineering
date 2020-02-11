@@ -1,9 +1,8 @@
-package d3arcolumbus.medEngineering.container;
+package d3arcolumbus.medEngineering.superchest;
 
-import d3arcolumbus.medEngineering.tile.TileSteelFurnace;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -11,12 +10,11 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class ContainerSteelFurnace extends Container {
+public class ContainerSuperchest extends Container {
 
-    private TileSteelFurnace te;
-    private static final int PROGRESS_ID = 0;
+    private TileSuperchest te;
 
-    public ContainerSteelFurnace(IInventory playerInventory, TileSteelFurnace te) {
+    public ContainerSuperchest(IInventory playerInventory, TileSuperchest te) {
         this.te = te;
 
         // This container references items out of our own inventory (the 9 slots we hold ourselves)
@@ -28,38 +26,34 @@ public class ContainerSteelFurnace extends Container {
 
     private void addPlayerSlots(IInventory playerInventory) {
         // Slots for the main inventory
-        int x = 8;
-        int y = 84;
         for (int row = 0; row < 3; ++row) {
             for (int col = 0; col < 9; ++col) {
-                this.addSlotToContainer(new Slot(playerInventory, col + row * 9 + 10, x, y));
-                x = x + 18;
-
+                int x = 10 + col * 18;
+                int y = row * 18 + 70;
+                this.addSlotToContainer(new Slot(playerInventory, col + row * 9 + 9, x, y));
             }
-            y = y + 18;
-            x = 8;
         }
 
         // Slots for the hotbar
-        x = 8;
-        y = 142;
-        for (int col = 0; col < 9; ++col) {
-            this.addSlotToContainer(new Slot(playerInventory, col, x, y));
-            x = x + 18;
+        for (int row = 0; row < 9; ++row) {
+            int x = 10 + row * 18;
+            int y = 58 + 70;
+            this.addSlotToContainer(new Slot(playerInventory, row, x, y));
         }
     }
 
     private void addOwnSlots() {
-
         IItemHandler itemHandler = this.te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 
-        addSlotToContainer(new SlotItemHandler(itemHandler, 0, 56 ,17 ));
-        addSlotToContainer(new SlotItemHandler(itemHandler, 1, 56, 53));
-        addSlotToContainer(new SlotItemHandler(itemHandler, 2, 116, 35));
-
-
+        int slotIndex = 0;
+        for (int row = 0; row < 3; ++row) {
+            for (int col = 0; col < 9; ++col) {
+                int x = 10 + col * 18;
+                int y = row * 18 + 8;
+                this.addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y));
+            }
+        }
     }
-
 
     @Override
     public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
@@ -70,11 +64,11 @@ public class ContainerSteelFurnace extends Container {
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
 
-            if (index < TileSteelFurnace.SIZE) {
-                if (!this.mergeItemStack(itemstack1, TileSteelFurnace.SIZE, this.inventorySlots.size(), true)) {
+            if (index < TileSuperchest.SIZE) {
+                if (!this.mergeItemStack(itemstack1, TileSuperchest.SIZE, this.inventorySlots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.mergeItemStack(itemstack1, 0, TileSteelFurnace.SIZE, false)) {
+            } else if (!this.mergeItemStack(itemstack1, 0, TileSuperchest.SIZE, false)) {
                 return ItemStack.EMPTY;
             }
 
@@ -91,22 +85,5 @@ public class ContainerSteelFurnace extends Container {
     @Override
     public boolean canInteractWith(EntityPlayer playerIn) {
         return te.canInteractWith(playerIn);
-    }
-
-    //For showing the player progress
-    @Override
-    public void detectAndSendChanges() {
-        super.detectAndSendChanges();
-        for(IContainerListener listener : listeners){
-            listener.sendWindowProperty(this, PROGRESS_ID, te.getProgress());
-        }
-    }
-
-    //for progress
-    @Override
-    public void updateProgressBar(int id, int data) {
-        if(id == PROGRESS_ID){
-            te.setProgress(data);
-        }
     }
 }

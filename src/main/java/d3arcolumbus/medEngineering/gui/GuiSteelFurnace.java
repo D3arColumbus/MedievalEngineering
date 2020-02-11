@@ -12,11 +12,13 @@ public class GuiSteelFurnace extends GuiContainer {
     public static final int HEIGHT = 166;
 
     private static final ResourceLocation background = new ResourceLocation(MedEngineering.MODID, "textures/gui/guisteelfurnace.png");
+    private TileSteelFurnace furnace;
 
     public GuiSteelFurnace(TileSteelFurnace tileEntity, ContainerSteelFurnace container) {
         super(container);
         xSize = WIDTH;
         ySize = HEIGHT;
+        furnace = tileEntity;
     }
 
     @Override
@@ -30,5 +32,9 @@ public class GuiSteelFurnace extends GuiContainer {
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         mc.getTextureManager().bindTexture(background);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+        //for progress
+        if(furnace.getProgress() > 0){
+            drawString(mc.fontRenderer, "Progress" + furnace.getProgress() + "t", guiLeft + 10, guiTop + 10, 0xffffff);
+        }
     }
 }

@@ -1,6 +1,7 @@
 package d3arcolumbus.medEngineering.tile;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
@@ -22,6 +23,7 @@ public class TileSteelFurnace extends TileEntity implements ITickable {
     public static final int OUTPUT_ITEM = 1;
     public static final int MAX_PROGRESS = 40;
     private int progress = 0;
+    private int coalCount = 0;
 
     @Override
     public void update() {
@@ -29,62 +31,68 @@ public class TileSteelFurnace extends TileEntity implements ITickable {
             //only server-side
             if(progress > 0){
                 //smelting has started
-                if(hasInput() != null){
+                if(hasValidInputs()){
                     progress --;
-                    markDirty();
                     if(progress == 0){
                         //smelting has finished
                         attemptSmelt();
-                        markDirty();
                     }
                 }else{
                     progress = 0;
                 }
-
             }else{
                 startSmelt();
-                markDirty();
             }
         }
+        markDirty();
     }
 
     private void attemptSmelt() {
-        if(hasInput() != null){
-            ItemStack result = hasInput();
+        if(hasValidInputs()){
+            ItemStack result = FurnaceRecipes.instance().getSmeltingResult(inputItemStackHandler.getStackInSlot(0));
             //.copy() is important....
-            if(insertOutput(result.copy(), false)){
+            if(insertOutput(getSmeltingResult().copy(), false)){
                 inputItemStackHandler.extractItem(0, 1, false);
-                //inputFuelStackHandler.extractItem(0,1,false);
+                inputFuelStackHandler.extractItem(0,1,false);
             }
         }
     }
 
 
-    private ItemStack hasInput(){
+    //returns true if the system found a valid smelting recipe for the input item
+    private boolean hasValidItemInput(){
         ItemStack result = FurnaceRecipes.instance().getSmeltingResult(inputItemStackHandler.getStackInSlot(0));
-        if(result != null){
-            return result;
+        return result != ItemStack.EMPTY;
+    }
+
+    private boolean hasValidInputs(){
+        ItemStack result = inputFuelStackHandler.extractItem(0,1,true);
+        if(result.getItem().equals(Items.COAL)){
+            return hasValidItemInput();
+        }
+        return false;
+    }
+
+    //returns the smelting result
+    private ItemStack getSmeltingResult(){
+        if(hasValidItemInput()){
+            return FurnaceRecipes.instance().getSmeltingResult(inputItemStackHandler.getStackInSlot(0));
         }
         return null;
     }
 
-
     private void startSmelt(){
-        ItemStack result = FurnaceRecipes.instance().getSmeltingResult(inputItemStackHandler.getStackInSlot(0));
-        if(hasInput() != null){
-            if(insertOutput(result.copy(), true)){
+        if(hasValidInputs())
+            if(insertOutput(getSmeltingResult().copy(), true)){
+
                 setProgress(MAX_PROGRESS);
-                markDirty();
             }
-        }
     }
 
     private boolean insertOutput(ItemStack output, boolean simulate) {
         ItemStack remaining = outputItemStackHandler.insertItem(0, output, simulate);
-        if(remaining != null){
-            return true;
-        }
-        return false;
+        //return ItemStack.EMPTY if the invSlot is either empty or filled with the same item
+        return remaining == ItemStack.EMPTY;
     }
 
 
@@ -145,9 +153,6 @@ public class TileSteelFurnace extends TileEntity implements ITickable {
             inputFuelStackHandler.deserializeNBT((NBTTagCompound) compound.getTag("inputFuel"));
         }
         if (compound.hasKey("outputItem")) {
-            outputItemStackHandler.deserializeNBT((NBTTagCompound) compound.getTag("outputItem"));
-        }
-        if (compound.hasKey("progress")) {
             outputItemStackHandler.deserializeNBT((NBTTagCompound) compound.getTag("outputItem"));
         }
         progress = compound.getInteger("progress");
