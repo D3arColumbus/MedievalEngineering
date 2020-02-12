@@ -1,6 +1,7 @@
 package d3arcolumbus.medEngineering;
 
 import d3arcolumbus.medEngineering.proxy.CommonProxy;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -20,7 +21,9 @@ public class MedEngineering {
 
     @Mod.Instance
     public static MedEngineering instance;
-    //test
+
+    public static CreativeTabs medEngineeringTab = new CreativeTabMedEngineering();
+
     public static Logger logger;
 
     @Mod.EventHandler

@@ -1,7 +1,7 @@
 package d3arcolumbus.medEngineering.block;
 
 import d3arcolumbus.medEngineering.MedEngineering;
-import d3arcolumbus.medEngineering.tile.TileSteelFurnace;
+import d3arcolumbus.medEngineering.tile.DemoTileSteelFurnace;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -9,7 +9,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -39,7 +38,7 @@ public class SteelFurnace extends Block implements ITileEntityProvider {
 
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TileSteelFurnace();
+        return new DemoTileSteelFurnace();
     }
 
     @Override
@@ -49,7 +48,7 @@ public class SteelFurnace extends Block implements ITileEntityProvider {
             return true;
         }
         TileEntity te = world.getTileEntity(pos);
-        if (!(te instanceof TileSteelFurnace)) {
+        if (!(te instanceof DemoTileSteelFurnace)) {
             return false;
         }
         player.openGui(MedEngineering.instance, GUI_ID, world, pos.getX(), pos.getY(), pos.getZ());

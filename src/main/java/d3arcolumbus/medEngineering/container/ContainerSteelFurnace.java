@@ -1,6 +1,6 @@
 package d3arcolumbus.medEngineering.container;
 
-import d3arcolumbus.medEngineering.tile.TileSteelFurnace;
+import d3arcolumbus.medEngineering.tile.DemoTileSteelFurnace;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
@@ -12,9 +12,9 @@ import net.minecraftforge.items.SlotItemHandler;
 
 public class ContainerSteelFurnace extends Container {
 
-    private TileSteelFurnace te;
+    private DemoTileSteelFurnace te;
 
-    public ContainerSteelFurnace(IInventory playerInventory, TileSteelFurnace te) {
+    public ContainerSteelFurnace(IInventory playerInventory, DemoTileSteelFurnace te) {
         this.te = te;
 
         // This container references items out of our own inventory (the 9 slots we hold ourselves)
@@ -80,11 +80,11 @@ public class ContainerSteelFurnace extends Container {
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
 
-            if (index < TileSteelFurnace.SIZE) {
-                if (!this.mergeItemStack(itemstack1, TileSteelFurnace.SIZE, this.inventorySlots.size(), true)) {
+            if (index < DemoTileSteelFurnace.SIZE) {
+                if (!this.mergeItemStack(itemstack1, DemoTileSteelFurnace.SIZE, this.inventorySlots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.mergeItemStack(itemstack1, 0, TileSteelFurnace.SIZE, false)) {
+            } else if (!this.mergeItemStack(itemstack1, 0, DemoTileSteelFurnace.SIZE, false)) {
                 return ItemStack.EMPTY;
             }
 

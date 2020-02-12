@@ -2,3 +2,5 @@ item.medengineering.firstitem.name=FirstItem
 
 tile.medengineering.firstblock.name=FirstBlock
 tile.medengineering.steelfurnace.name=Steel Furnace
+
+itemGroup.medengineering=Medieval Engineering

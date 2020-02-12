@@ -14,7 +14,7 @@ import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 
 import javax.annotation.Nonnull;
 
-public class TileSteelFurnace extends TileEntity implements ITickable {
+public class DemoTileSteelFurnace extends TileEntity implements ITickable {
 
     public static final int SIZE = 3;
     public static final int INPUT_ITEM = 1;
@@ -110,7 +110,7 @@ public class TileSteelFurnace extends TileEntity implements ITickable {
         protected void onContentsChanged(int slot) {
             // We need to tell the tile entity that something has changed so
             // that the chest contents is persisted
-            TileSteelFurnace.this.markDirty();
+            DemoTileSteelFurnace.this.markDirty();
         }
     };
 
@@ -119,7 +119,7 @@ public class TileSteelFurnace extends TileEntity implements ITickable {
         protected void onContentsChanged(int slot) {
             // We need to tell the tile entity that something has changed so
             // that the chest contents is persisted
-            TileSteelFurnace.this.markDirty();
+            DemoTileSteelFurnace.this.markDirty();
         }
     };
 
@@ -128,7 +128,7 @@ public class TileSteelFurnace extends TileEntity implements ITickable {
         protected void onContentsChanged(int slot) {
             // We need to tell the tile entity that something has changed so
             // that the chest contents is persisted
-            TileSteelFurnace.this.markDirty();
+            DemoTileSteelFurnace.this.markDirty();
         }
     };
 
