@@ -10,18 +10,22 @@ public class ModBlocks {
 
     @GameRegistry.ObjectHolder(MedEngineering.MODID + ":firstblock")
     public static FirstBlock firstBlock;
-    @GameRegistry.ObjectHolder(MedEngineering.MODID + ":Demosteelfurnace")
-    public static SteelFurnace Demosteelfurnace;
+   // @GameRegistry.ObjectHolder(MedEngineering.MODID + ":Demosteelfurnace")
+    //public static SteelFurnace Demosteelfurnace;
     @GameRegistry.ObjectHolder(MedEngineering.MODID + ":blocksteelfurnace")
     public static BlockSteelFurnace blockSteelFurnace;
+
+    @GameRegistry.ObjectHolder(MedEngineering.MODID + ":blockhardenedclay")
+    public static BlockHardenedClay blockHardenedClay;
 
 
     @SideOnly(Side.CLIENT)
     public static void initModels() {
         firstBlock.initModel();
         //dataBlock.initModel();
-        Demosteelfurnace.initModel();
+       // Demosteelfurnace.initModel();
         blockSteelFurnace.initModel();
+        blockHardenedClay.initModel();
 
 
 

@@ -1,6 +1,10 @@
 item.medengineering.firstitem.name=FirstItem
+item.medengineering.itemhammer.name=Hammer
 
 tile.medengineering.firstblock.name=FirstBlock
 tile.medengineering.steelfurnace.name=Steel Furnace
+tile.medengineering.blocksteelfurnace.name=Steel Furnace Controller
+tile.medengineering.blockhardenedclay.name=Hardened Clay
 
-itemGroup.medengineering=Medieval Engineering
+
+itemGroup.medievalengineering=Medieval Engineering

@@ -1,6 +1,7 @@
 package d3arcolumbus.medEngineering.steelfurnace;
 
 import com.sun.org.apache.xpath.internal.operations.Mult;
+import d3arcolumbus.medEngineering.MedEngineering;
 import d3arcolumbus.medEngineering.block.BlockBase;
 import d3arcolumbus.medEngineering.item.ModItems;
 import net.minecraft.block.ITileEntityProvider;
@@ -18,12 +19,14 @@ import javax.annotation.Nullable;
 public class BlockSteelFurnace extends BlockBase implements ITileEntityProvider {
 
     public BlockSteelFurnace() {
-        super(Material.IRON, "steelfurnace", "steelfurnace");
+        super(Material.IRON, "blocksteelfurnace", "blocksteelfurnace");
     }
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         TileSteelFurnace te = (TileSteelFurnace) worldIn.getTileEntity(pos);
+        MedEngineering.logger.info("OnAct: " + pos.getX() + " " + pos.getY() + " "+ pos.getZ());
+
         if(playerIn.getHeldItem(hand).getItem() == ModItems.itemHammer) {
             MultiBlockSteelFurnace.toggleMultiblock(te, worldIn, playerIn, pos);
             return true;

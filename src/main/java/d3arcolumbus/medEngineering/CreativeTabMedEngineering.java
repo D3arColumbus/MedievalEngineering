@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 
 public class CreativeTabMedEngineering extends CreativeTabs {
     public CreativeTabMedEngineering() {
-        super("Medieval Engineering");
+        super("medievalengineering");
     }
 
     @Override

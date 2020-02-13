@@ -40,12 +40,15 @@ public class TileSteelFurnace extends TileEntity {
     @Override
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
+        isFormed = compound.getBoolean("isFormed");
 
     }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        return super.writeToNBT(compound);
+        super.writeToNBT(compound);
+        compound.setBoolean("isFormed", isFormed);
+        return compound;
 
     }
 

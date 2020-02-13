@@ -15,7 +15,7 @@ public class BlockBase extends Block {
         super(materialIn);
         setCreativeTab(MedEngineering.medEngineeringTab);
         setHardness(2F);
-        setUnlocalizedName(MedEngineering.MODID + unlocalizedName);
+        setUnlocalizedName(MedEngineering.MODID + "." + unlocalizedName);
         setRegistryName(registryName);
 
     }

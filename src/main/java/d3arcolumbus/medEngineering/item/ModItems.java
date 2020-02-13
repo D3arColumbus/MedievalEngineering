@@ -10,7 +10,7 @@ public class ModItems {
     @GameRegistry.ObjectHolder(MedEngineering.MODID + ":firstitem")
     public static FirstItem firstitem;
     @GameRegistry.ObjectHolder(MedEngineering.MODID + ":itemhammer")
-    public static FirstItem itemHammer;
+    public static ItemHammer itemHammer;
 
     @SideOnly(Side.CLIENT)
     public static void initModels() {
