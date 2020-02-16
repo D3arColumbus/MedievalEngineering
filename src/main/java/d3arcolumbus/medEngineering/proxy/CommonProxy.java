@@ -5,6 +5,10 @@ import d3arcolumbus.medEngineering.block.BlockHardenedClay;
 import d3arcolumbus.medEngineering.block.FirstBlock;
 import d3arcolumbus.medEngineering.block.ModBlocks;
 
+import d3arcolumbus.medEngineering.charcoalFurnace.BlockCharcoalFurnace;
+import d3arcolumbus.medEngineering.charcoalFurnace.BlockHardenedClayVent;
+import d3arcolumbus.medEngineering.charcoalFurnace.TileCharcoalFurnace;
+import d3arcolumbus.medEngineering.item.ItemCharCoal;
 import d3arcolumbus.medEngineering.item.ItemHammer;
 import d3arcolumbus.medEngineering.item.ItemSteelIngot;
 import d3arcolumbus.medEngineering.steelfurnace.BlockSteelFurnace;
@@ -37,29 +41,30 @@ public class CommonProxy {
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
         event.getRegistry().register(new FirstBlock());
-       // event.getRegistry().register(new SteelFurnace());
-
         event.getRegistry().register(new BlockSteelFurnace());
-
         event.getRegistry().register(new BlockHardenedClay());
+        event.getRegistry().register(new BlockCharcoalFurnace());
+        event.getRegistry().register(new BlockHardenedClayVent());
     }
 
     @SubscribeEvent
     public static void registerTile(RegistryEvent.Register<Item> event) {
         GameRegistry.registerTileEntity(DemoTileSteelFurnace.class, MedEngineering.MODID + "demoTileSteelFurnace");
         GameRegistry.registerTileEntity(TileSteelFurnace.class, MedEngineering.MODID + "tileSteelFurnace");
+        GameRegistry.registerTileEntity(TileCharcoalFurnace.class, MedEngineering.MODID + "tilecharcoalfurnace");
     }
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
         //ItemBlock
         event.getRegistry().register(new ItemBlock(ModBlocks.firstBlock).setRegistryName(ModBlocks.firstBlock.getRegistryName()));
-       // event.getRegistry().register(new ItemBlock(ModBlocks.Demosteelfurnace).setRegistryName(ModBlocks.Demosteelfurnace.getRegistryName()));
         event.getRegistry().register(new ItemBlock(ModBlocks.blockSteelFurnace).setRegistryName(ModBlocks.blockSteelFurnace.getRegistryName()));
         event.getRegistry().register(new ItemBlock(ModBlocks.blockHardenedClay).setRegistryName(ModBlocks.blockHardenedClay.getRegistryName()));
-        //event.getRegistry().register(new ItemBlock(ModBlocks.dataBlock).setRegistryName(ModBlocks.dataBlock.getRegistryName()));
+        event.getRegistry().register(new ItemBlock(ModBlocks.blockCharcoalFurnace).setRegistryName(ModBlocks.blockCharcoalFurnace.getRegistryName()));
+        event.getRegistry().register(new ItemBlock(ModBlocks.blockHardenedClayVent).setRegistryName(ModBlocks.blockHardenedClayVent.getRegistryName()));
         //Item
         event.getRegistry().register(new ItemHammer());
         event.getRegistry().register(new ItemSteelIngot());
+        event.getRegistry().register(new ItemCharCoal());
     }
 }

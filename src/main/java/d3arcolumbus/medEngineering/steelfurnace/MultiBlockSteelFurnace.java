@@ -2,13 +2,14 @@ package d3arcolumbus.medEngineering.steelfurnace;
 
 import d3arcolumbus.medEngineering.MedEngineering;
 import d3arcolumbus.medEngineering.block.ModBlocks;
+import d3arcolumbus.medEngineering.util.MultiBlock;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+
+import java.util.Objects;
 
 public class MultiBlockSteelFurnace {
 
@@ -21,34 +22,13 @@ public class MultiBlockSteelFurnace {
 
     public static boolean validMultiblock(World world, BlockPos pos, TileSteelFurnace te){
         foundController = 0;
-        //4 Possibilities
-        //1. x + 2
-        if(world.getBlockState(pos.add(2,0,0)).getBlock() == ModBlocks.blockHardenedClay){
-            te.setIsFacing(TileSteelFurnace.facing.EAST);
-            pos = pos.add(1,  0 , 0);
-        }
-        //2. x - 2
-        else if(world.getBlockState(pos.add(-2,0,0)).getBlock() == ModBlocks.blockHardenedClay){
-            te.setIsFacing(TileSteelFurnace.facing.WEST);
-            pos = pos.add(-1,  0 , 0);
-        }
-        //3. z + 2
-        else if(world.getBlockState(pos.add(0,0,2)).getBlock() == ModBlocks.blockHardenedClay){
-            te.setIsFacing(TileSteelFurnace.facing.SOUTH);
-            pos = pos.add(0,  0 , 1);
-        }
-        //4. z - 2
-        else if(world.getBlockState(pos.add(0,0,-2)).getBlock() == ModBlocks.blockHardenedClay){
-            te.setIsFacing(TileSteelFurnace.facing.NORTH);
-            pos = pos.add(0,  0 , -1);
 
-        }else{
-            MedEngineering.logger.warn("No facing :" + te.getIsFacing());
+        if(MultiBlock.lowerLeftCorner(world, pos, 3, ModBlocks.blockHardenedClay) == null){
             return false;
         }
 
-        //lower left corner
-        pos = pos.add(-1,  0 , -1);
+        pos = MultiBlock.lowerLeftCorner(world, pos, 3, ModBlocks.blockHardenedClay);
+
 
         //first layer
         if(!checkLayer(pos, world))
