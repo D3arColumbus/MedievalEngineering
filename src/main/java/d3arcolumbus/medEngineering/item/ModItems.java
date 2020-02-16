@@ -7,14 +7,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ModItems {
 
-    @GameRegistry.ObjectHolder(MedEngineering.MODID + ":firstitem")
-    public static FirstItem firstitem;
+
     @GameRegistry.ObjectHolder(MedEngineering.MODID + ":itemhammer")
     public static ItemHammer itemHammer;
+    @GameRegistry.ObjectHolder(MedEngineering.MODID + ":itemsteelingot")
+    public static ItemSteelIngot itemSteelIngot;
 
     @SideOnly(Side.CLIENT)
     public static void initModels() {
-        firstitem.initModel();
+
         itemHammer.initModel();
+        itemSteelIngot.initModel();
     }
 }

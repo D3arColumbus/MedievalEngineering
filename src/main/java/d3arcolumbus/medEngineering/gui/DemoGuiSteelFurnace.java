@@ -1,19 +1,19 @@
 package d3arcolumbus.medEngineering.gui;
 
 import d3arcolumbus.medEngineering.MedEngineering;
-import d3arcolumbus.medEngineering.container.ContainerSteelFurnace;
+import d3arcolumbus.medEngineering.container.DemoContainerSteelFurnace;
 import d3arcolumbus.medEngineering.tile.DemoTileSteelFurnace;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiSteelFurnace extends GuiContainer {
+public class DemoGuiSteelFurnace extends GuiContainer {
 
     public static final int WIDTH = 176;
     public static final int HEIGHT = 166;
 
     private static final ResourceLocation background = new ResourceLocation(MedEngineering.MODID, "textures/gui/guisteelfurnace.png");
 
-    public GuiSteelFurnace(DemoTileSteelFurnace tileEntity, ContainerSteelFurnace container) {
+    public DemoGuiSteelFurnace(DemoTileSteelFurnace tileEntity, DemoContainerSteelFurnace container) {
         super(container);
         xSize = WIDTH;
         ySize = HEIGHT;

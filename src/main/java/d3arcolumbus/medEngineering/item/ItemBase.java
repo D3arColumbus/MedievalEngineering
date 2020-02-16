@@ -12,6 +12,7 @@ public class ItemBase extends Item {
     public ItemBase(String registryName, String unlocalizedName) {
         setRegistryName(registryName);        // The unique name (within your mod) that identifies this item
         setUnlocalizedName(MedEngineering.MODID + "." + unlocalizedName);     // Used for localization (en_US.lang)
+        setCreativeTab(MedEngineering.medEngineeringTab);
     }
 
     @SideOnly(Side.CLIENT)

@@ -4,9 +4,9 @@ import d3arcolumbus.medEngineering.MedEngineering;
 import d3arcolumbus.medEngineering.block.BlockHardenedClay;
 import d3arcolumbus.medEngineering.block.FirstBlock;
 import d3arcolumbus.medEngineering.block.ModBlocks;
-import d3arcolumbus.medEngineering.block.SteelFurnace;
-import d3arcolumbus.medEngineering.item.FirstItem;
+
 import d3arcolumbus.medEngineering.item.ItemHammer;
+import d3arcolumbus.medEngineering.item.ItemSteelIngot;
 import d3arcolumbus.medEngineering.steelfurnace.BlockSteelFurnace;
 import d3arcolumbus.medEngineering.steelfurnace.TileSteelFurnace;
 import d3arcolumbus.medEngineering.tile.DemoTileSteelFurnace;
@@ -59,7 +59,7 @@ public class CommonProxy {
         event.getRegistry().register(new ItemBlock(ModBlocks.blockHardenedClay).setRegistryName(ModBlocks.blockHardenedClay.getRegistryName()));
         //event.getRegistry().register(new ItemBlock(ModBlocks.dataBlock).setRegistryName(ModBlocks.dataBlock.getRegistryName()));
         //Item
-        event.getRegistry().register(new FirstItem());
         event.getRegistry().register(new ItemHammer());
+        event.getRegistry().register(new ItemSteelIngot());
     }
 }

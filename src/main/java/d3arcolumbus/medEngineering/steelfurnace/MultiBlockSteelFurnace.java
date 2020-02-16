@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 
 public class MultiBlockSteelFurnace {
 
-
+    private static int foundController = 0;
 
 
     public static void formMultiblock(){
@@ -20,85 +20,73 @@ public class MultiBlockSteelFurnace {
     }
 
     public static boolean validMultiblock(World world, BlockPos pos, TileSteelFurnace te){
-
-        MedEngineering.logger.info(pos.getX() + " " + pos.getY() + " "+ pos.getZ());
-        int foundController = 0;
+        foundController = 0;
         //4 Possibilities
-
         //1. x + 2
         if(world.getBlockState(pos.add(2,0,0)).getBlock() == ModBlocks.blockHardenedClay){
             te.setIsFacing(TileSteelFurnace.facing.EAST);
             pos = pos.add(1,  0 , 0);
-
         }
         //2. x - 2
         else if(world.getBlockState(pos.add(-2,0,0)).getBlock() == ModBlocks.blockHardenedClay){
             te.setIsFacing(TileSteelFurnace.facing.WEST);
             pos = pos.add(-1,  0 , 0);
-
         }
         //3. z + 2
         else if(world.getBlockState(pos.add(0,0,2)).getBlock() == ModBlocks.blockHardenedClay){
             te.setIsFacing(TileSteelFurnace.facing.SOUTH);
             pos = pos.add(0,  0 , 1);
-
-
         }
         //4. z - 2
-        else if(world.getBlockState(pos.add(-2,0,-2)).getBlock() == ModBlocks.blockHardenedClay){
+        else if(world.getBlockState(pos.add(0,0,-2)).getBlock() == ModBlocks.blockHardenedClay){
             te.setIsFacing(TileSteelFurnace.facing.NORTH);
             pos = pos.add(0,  0 , -1);
 
-        }
-        MedEngineering.logger.info(pos.getX() + " " + pos.getY() + " "+ pos.getZ());
-        pos = pos.add(-1,  0 , -1);
-        MedEngineering.logger.info(pos.getX() + " " + pos.getY() + " "+ pos.getZ());
-        //first layer
-
-        for(int xx = 0; xx < 3; xx++){
-            for(int zz = 1; zz <= 3; zz++){
-                MedEngineering.logger.info(pos.add(xx, 0, zz));
-                MedEngineering.logger.info(world.getBlockState(pos.add(xx, 0, zz)).getBlock());
-
-
-                if(world.getBlockState(pos.add(xx, 0, zz)).getBlock() == ModBlocks.blockHardenedClay){
-
-                }
-
-
-                else if(world.getBlockState(pos.add(xx, 0, zz)).getBlock() == ModBlocks.blockSteelFurnace){
-                    foundController += 1;
-
-                }else{
-                    MedEngineering.logger.info(world.getBlockState(pos.add(xx, 0, zz)).getBlock() == ModBlocks.blockHardenedClay);
-                    MedEngineering.logger.info(world.getBlockState(pos.add(xx, 0, zz)).getBlock());
-                    return false;
-                }
-
-            }
-        }
-
-        if(foundController > 1){
+        }else{
+            MedEngineering.logger.warn("No facing :" + te.getIsFacing());
             return false;
         }
 
+        //lower left corner
+        pos = pos.add(-1,  0 , -1);
 
+        //first layer
+        if(!checkLayer(pos, world))
+            return false;
 
-        MedEngineering.logger.info(te.getIsFacing());
+        //second layer
+        pos = pos.add(0,  1 , 0);
+        if(!checkLayer(pos, world))
+            return false;
 
-      //  for(int x = 1; x < )
-
-
-
-
-
-        /*for(int )
-        world.getBlockState()
-
-         */
-        return true;
+        //3 & 4 Layer
+        pos = pos.add(0,  1 , 0);
+        if(world.getBlockState(pos.add(1, 0, 0)).getBlock() == ModBlocks.blockHardenedClay)
+            if(world.getBlockState(pos.add(0, 0, 1)).getBlock() == ModBlocks.blockHardenedClay)
+                if(world.getBlockState(pos.add(2, 0, 1)).getBlock() == ModBlocks.blockHardenedClay)
+                    if(world.getBlockState(pos.add(1, 0, 2)).getBlock() == ModBlocks.blockHardenedClay)
+                        if(world.getBlockState(pos.add(1, 0, 1)).getBlock() == ModBlocks.blockHardenedClay)
+                            if(world.getBlockState(pos.add(1, 1, 1)).getBlock() == ModBlocks.blockHardenedClay)
+                                return foundController == 1;
+       return false;
     }
 
+
+    private static boolean checkLayer(BlockPos pos, World world){
+        for(int xx = 0; xx < 3; xx++) {
+            for (int zz = 0; zz < 3; zz++) {
+                //if not hardened clay or steel furnace
+                if (!(world.getBlockState(pos.add(xx, 0, zz)).getBlock() == ModBlocks.blockHardenedClay) &&
+                        !(world.getBlockState(pos.add(xx, 0, zz)).getBlock() == ModBlocks.blockSteelFurnace))
+                            return false;
+                 else {
+                    if(world.getBlockState(pos.add(xx, 0, zz)).getBlock() == ModBlocks.blockSteelFurnace)
+                        foundController += 1;
+                }
+            }
+        }
+        return true;
+    }
 
 
     public static void destroyMutliblock(){

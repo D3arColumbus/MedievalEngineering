@@ -10,11 +10,11 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class ContainerSteelFurnace extends Container {
+public class DemoContainerSteelFurnace extends Container {
 
     private DemoTileSteelFurnace te;
 
-    public ContainerSteelFurnace(IInventory playerInventory, DemoTileSteelFurnace te) {
+    public DemoContainerSteelFurnace(IInventory playerInventory, DemoTileSteelFurnace te) {
         this.te = te;
 
         // This container references items out of our own inventory (the 9 slots we hold ourselves)
