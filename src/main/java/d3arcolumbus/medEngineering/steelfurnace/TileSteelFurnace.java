@@ -3,6 +3,7 @@ package d3arcolumbus.medEngineering.steelfurnace;
 import d3arcolumbus.medEngineering.MedEngineering;
 import d3arcolumbus.medEngineering.item.ModItems;
 import d3arcolumbus.medEngineering.tile.DemoTileSteelFurnace;
+import d3arcolumbus.medEngineering.util.TileEntityMultiblock;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -22,7 +23,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.net.NoRouteToHostException;
 
-public class TileSteelFurnace extends TileEntity implements ITickable {
+public class TileSteelFurnace extends TileEntityMultiblock implements ITickable {
 
     private boolean isFormed = false;
     private facing isFacing = facing.UNDEFINED;

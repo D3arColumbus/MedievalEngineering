@@ -23,11 +23,11 @@ public class MultiBlockSteelFurnace {
     public static boolean validMultiblock(World world, BlockPos pos, TileSteelFurnace te){
         foundController = 0;
 
-        if(MultiBlock.lowerLeftCorner(world, pos, 3, ModBlocks.blockHardenedClay) == null){
+        if(MultiBlock.lowerLeftCorner(world, te, pos, ModBlocks.blockHardenedClay, 3) == null){
             return false;
         }
 
-        pos = MultiBlock.lowerLeftCorner(world, pos, 3, ModBlocks.blockHardenedClay);
+        pos = MultiBlock.lowerLeftCorner(world, te, pos, ModBlocks.blockHardenedClay, 3);
 
 
         //first layer

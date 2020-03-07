@@ -9,6 +9,7 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -25,6 +26,8 @@ public class BlockCharcoalFurnace extends BlockBase implements ITileEntityProvid
         super(Material.CLAY, name, name);
     }
 
+
+
     @Nullable
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
@@ -40,6 +43,8 @@ public class BlockCharcoalFurnace extends BlockBase implements ITileEntityProvid
                 if(playerIn.getHeldItem(hand).getItem() == ModItems.itemHammer) {
                     MultiBlockCharcoalFurnace.toggleMultiblock(te, worldIn, playerIn, pos);
                     return true;
+                }else if(playerIn.getHeldItem(hand).getItem() == Items.FLINT_AND_STEEL){
+                    te.liteFire();
                 }
             }
         }
